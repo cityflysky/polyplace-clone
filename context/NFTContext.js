@@ -148,6 +148,36 @@ export const NFTProvider = ({ children }) => {
         }
     };
 
+    const buyNft = async (nft) => {
+        try {
+            if (!nft?.tokenId || !nft?.price) {
+                throw new Error('Missing NFT data');
+            }
+
+            const web3Modal = new Web3Modal();
+            const connection = await web3Modal.connect();
+            const provider = new ethers.providers.Web3Provider(connection);
+            const signer = provider.getSigner();
+            const contract = fetchContract(signer);
+
+            const price = ethers.utils.parseUnits(String(nft.price), 'ether');
+
+            setIsLoadingNFT(true);
+            const transaction = await contract.createMarketSale(nft.tokenId, {
+                value: price,
+            });
+
+            await transaction.wait();
+            setIsLoadingNFT(false);
+
+            return transaction;
+        } catch (error) {
+            console.error('Error buying NFT:', error);
+            setIsLoadingNFT(false);
+            throw error;
+        }
+    };
+
     const fetchNFTs = async () => {
         try {
             setIsLoadingNFT(false);
@@ -258,6 +288,7 @@ export const NFTProvider = ({ children }) => {
                 connectWallet,
                 uploadToIPFS,
                 createNFT,
+                buyNft,
                 fetchNFTs,
                 fetchMyNFTsOrListedNFTs,
                 setIsLoadingNFT,
