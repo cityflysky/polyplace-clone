@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import axios from 'axios';
@@ -148,12 +148,12 @@ export const NFTProvider = ({ children }) => {
         }
     };
 
-    const buyNft = async (nft) => {
-        try {
-            if (!nft?.tokenId || !nft?.price) {
-                throw new Error('Missing NFT data');
-            }
+    const buyNft = useCallback(async (nft) => {
+        if (!nft?.tokenId || !nft?.price) {
+            throw new Error('Missing NFT data');
+        }
 
+        try {
             const web3Modal = new Web3Modal();
             const connection = await web3Modal.connect();
             const provider = new ethers.providers.Web3Provider(connection);
@@ -168,15 +168,14 @@ export const NFTProvider = ({ children }) => {
             });
 
             await transaction.wait();
-            setIsLoadingNFT(false);
-
             return transaction;
         } catch (error) {
             console.error('Error buying NFT:', error);
-            setIsLoadingNFT(false);
             throw error;
+        } finally {
+            setIsLoadingNFT(false);
         }
-    };
+    }, []);
 
     const fetchNFTs = async () => {
         try {
