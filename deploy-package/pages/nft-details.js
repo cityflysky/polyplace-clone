@@ -64,6 +64,11 @@ const AssetDetails = () => {
     }, [router.isReady]);
 
     const checkout = async () => {
+        if (typeof buyNft !== 'function') {
+            console.error('buyNft handler is unavailable');
+            return;
+        }
+
         await buyNft(nft);
 
         setPaymentModal(false);

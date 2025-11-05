@@ -69,3 +69,4 @@ playwright-report/
 *.tmp
 *.temp
 .cache/
+/deploy-package/
