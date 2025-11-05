@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Next.js
+/.next/
+/out/
+.next
+
+# Production
+/build
+
+# Environment variables (CRITICAL - Contains sensitive API keys and private keys)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.secret
+*.pem
+*.key
+
+# Vercel
+.vercel
+
+# Hardhat
+cache/
+artifacts/
+coverage/
+coverage.json
+typechain/
+typechain-types/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Testing
+.nyc_output
+test-results/
+playwright-report/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
