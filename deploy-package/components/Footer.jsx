@@ -14,8 +14,9 @@ const Footer = () => {
                 <div className="flexStart flex-1 flex-col">
                     <div className="flexCenter">
                         <Link href="/">
-
-                            <Image src={images.logo02} className='cursor-pointer' objectFit="contain" width={40} height={40} alt="logo" />
+                            <a>
+                                <Image src={images.logo02} className='cursor-pointer' objectFit="contain" width={40} height={40} alt="logo" />
+                            </a>
                         </Link>
                         <p className=" dark:text-white text-nft-dark font-semibold text-lg ml-1">Polyplace</p>
                     </div>

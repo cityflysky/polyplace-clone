@@ -7,6 +7,7 @@ const nextConfig = {
     // Disable image optimization for better compatibility
     images: {
         unoptimized: true,
+        domains: ['gateway.pinata.cloud', 'nftstorage.link', 'ipfs.io'],
     },
     webpackDevMiddleware: (config) => {
         config.watchOptions = {
